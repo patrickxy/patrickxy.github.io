@@ -2,10 +2,77 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>111</title>
+    <title>蜂巢图片墙效果</title>
+    <style>
+        *{
+            margin:0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .list{
+            margin-top: 50px;
+            width: 200px;
+            height: 200px;
+            position: relative;
+            /*float: left;*/
+        }
+        .list .first{
+            width: 173px;/*根号3*/
+            height: 100px;
+            position: absolute;
+            overflow: hidden;
+
+        }
+        .list .second{
+            width: 173px;/*根号3*/
+            height: 100px;
+            position: absolute;
+            overflow: hidden;
+            -webkit-transform:rotate(60deg);
+        }
+        .list .third{
+            width: 173px;/*根号3*/
+            height: 100px;
+            position: absolute;
+            overflow: hidden;
+            -webkit-transform:rotate(-60deg);
+        }
+        .list .first img{
+            margin-top:-50px;
+        }
+        .list .second img{
+            -webkit-transform:rotate(-60deg);
+            margin-top:-50px;
+        }
+        .list .third img{
+            -webkit-transform:rotate(60deg);
+            margin-top:-50px;
+        }
+    </style>
 </head>
 <body>
-222
-<img src="/css/images/banner.jpg">
+    <div class="list">
+        <div class="first">
+            <img src="images/liubianxing/dota1.jpg" width="173" height="200">
+        </div>
+        <div class="second">
+            <img src="images/liubianxing/dota1.jpg" width="173" height="200">
+        </div>
+        <div class="third">
+            <img src="images/liubianxing/dota1.jpg" width="173" height="200">
+        </div>
+    </div>
+    <div class="list">
+        <div class="first">
+            <img src="images/liubianxing/dota3.jpg" width="173" height="200">
+        </div>
+        <div class="second">
+            <img src="images/liubianxing/dota3.jpg" width="173" height="200">
+        </div>
+        <div class="third">
+            <img src="images/liubianxing/dota3.jpg" width="173" height="200">
+        </div>
+    </div>
+
 </body>
 </html>
