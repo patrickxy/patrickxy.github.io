@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="Cache-Control " content="no-cache,must-revalidate">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+    <title>滤镜效果</title>
+    <link rel="stylesheet" href="../../common/css/reset_pc.css">
+    <style>
+        html,body{
+            height: 100%;
+        }
+        body{
+            background: #f7f7f7;
+            box-sizing: border-box;
+            padding-top: 100px;
+        }
+        #card-wrap{
+            width: 1200px;
+            margin:0 auto;
+            display: flex;
+            justify-content: space-between;
+        }
+        .card{
+            width: 240px;
+            height: 135px;
+            background-size: 100% 100%;
+            background-repeat:no-repeat;
+
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(255,255,255,0.4);
+            -webkit-transition: all ease-out 0.5s;
+            -moz-transition: all ease-out 0.5s;
+            -ms-transition: all ease-out 0.5s;
+            -o-transition: all ease-out 0.5s;
+            transition: all ease-out 0.5s;
+            -webkit-filter: sepia(1) saturate(0.5);
+            -moz-filter: sepia(1) saturate(0.5);
+            -ms-filter: sepia(1) saturate(0.5);
+            -o-filter: sepia(1) saturate(0.5);
+            filter: sepia(1) saturate(0.5);
+            -webkit-backface-visibility: visible;
+            -moz-backface-visibility: visible;
+            -ms-backface-visibility: visible;
+            backface-visibility: visible;
+        }
+        #card-wrap li:hover .card{
+            -webkit-filter: none;
+            -moz-filter: none;
+            -ms-filter: none;
+            -o-filter: none;
+            filter: none;
+            -webkit-transform-origin: center 60%;
+            -moz-transform-origin: center 60%;
+            -ms-transform-origin: center 60%;
+            -o-transform-origin: center 60%;
+            transform-origin: center 60%;
+            -webkit-transform: scale(1.2) rotateY(180deg);
+            -moz-transform: scale(1.2) rotateY(180deg);
+            -ms-transform: scale(1.2) rotateY(180deg);
+            -o-transform: scale(1.2) rotateY(180deg);
+            transform: scale(1.2) rotateY(180deg);
+        }
+    </style>
+</head>
+<body>
+    <ul id="card-wrap">
+        <li><div class="card" style="background-image: url(../../images/girls/girl1_1920_1080.jpg)"></div></li>
+        <li><div class="card" style="background-image: url(../../images/girls/girl2_1920_1080.jpg)"></div></li>
+        <li><div class="card" style="background-image: url(../../images/girls/girl3_1920_1080.jpg)"></div></li>
+        <li><div class="card" style="background-image: url(../../images/girls/girl4_1920_1080.jpg)"></div></li>
+    </ul>
+</body>
+</html>

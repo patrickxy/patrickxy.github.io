@@ -1,0 +1,128 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <title>Responsive Menu Demo</title>
+    <link rel="stylesheet" type="text/css" href="../../common/css/reset_pc.css">
+    <style>
+        *{
+            /*box-sizing: border-box;*/
+        }
+        header{background-color:#000;color:#FFF;padding:5px;height:30px;}
+        header ul{z-index:999;background-color:#000;right:10px;position: absolute;}
+        header ul li{cursor:pointer;width:80px;float:left;margin:0px 10px;height:30px;text-align:center;line-height:30px;}
+        header ul li a{color:#FFF;text-decoration:none;}
+        header ul li:hover,header ul li.active{background-color:#F5F5F5;border-radius:2px;}
+        header ul li:hover > a,header ul li.active > a{color:#000;text-decoration:none;}
+        header ul li:first-child{display:none;}
+
+        a.Link{display:none;}
+
+        @media (max-width: 640px){
+            header ul li{float:none;display:none;margin:10px;}
+            header ul li:first-child{display:list-item;margin:0px 10px;}
+            header ul:hover > li,header ul:focus > li,header ul:active > li{display:list-item;}
+            header ul li:first-child:hover{background-color:#000;color:#FFF;}
+            a.Link{display:block;text-align:center;margin-top:30%;color:#5AC9C4;font-size:20px;font-family:Verdana;}
+        }
+
+        #mask{
+            position: fixed;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,.4);
+            z-index: 999;
+        }
+        .popup{
+            width: 400px;
+            height: 300px;
+            border:solid 1px #666;
+            -webkit-border-radius:5px;
+            -moz-border-radius:5px;
+            border-radius:5px;
+            position: fixed;
+            z-index: 1000;
+            left: 50%;
+            top: 50%;
+            margin:-200px 0 0 -150px;
+            background: #fff;
+        }
+        .popup .pop-close{
+            display: block;
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right:0;
+            top:0;
+            line-height: 20px;
+            text-align: center;
+            text-decoration: none;
+            border:solid 1px #666;
+            border-radius: 20px;
+            transition: all linear .5s;
+
+        }
+        .popup .pop-close:hover{
+            transform: rotate(180deg);
+        }
+        .menu-icon{
+            display: inline-block;
+            padding: 9px 5px;
+            margin:20px;
+            background-color: #000;
+            border-radius:3px;
+            border:solid 1px cornflowerblue;
+        }
+        .menu-icon .icon-bar{
+            display: block;
+            width: 22px;
+            height: 2px;
+            border-radius: 1px;
+            background-color: #fff;
+            transition: all linear .4s;
+        }
+        .menu-icon .icon-bar+.icon-bar{
+            margin-top: 4px;
+            transform-origin: 50% 50%;
+
+        }
+        .menu-icon:hover .icon-bar:nth-child(1){
+            display: none;
+        }
+        .menu-icon:hover .icon-bar:nth-child(2){
+            transform: rotate(45deg);
+        }
+        .menu-icon:hover .icon-bar:nth-child(3){
+            margin-top:-2px;
+            transform: rotate(-45deg);
+        }
+    </style>
+</head>
+<body>
+<header class="clearfix">
+    <ul>
+        <li>Menu</li>
+        <li class="active"><a href="?1">Home</a></li>
+        <li><a href="?2">Docs</a></li>
+        <li><a href="?3">Download</a></li>
+        <li><a href="?4">Demo</a></li>
+        <li><a href="?5">About us</a></li>
+    </ul>
+</header>
+<div class="container"></div>
+<div id="mask"></div>
+<div class="popup">
+    <a href="javascript:;" class="pop-close">X</a>
+    <div class="menu-icon">
+        <div class="icon-bar"></div>
+        <div class="icon-bar"></div>
+        <div class="icon-bar"></div>
+    </div>
+</div>
+</body>
+</html>
