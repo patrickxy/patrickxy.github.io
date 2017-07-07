@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>es6对象扩展</title>
+</head>
+<body>
+
+</body>
+<script>
+//    <!-- 简写属性-->
+    let x = 1; let y = 2;
+    let xy = {x,y};
+
+    console.log(xy);//{x:1,y:2} 等价于 xy={x:x,y:y}
+
+//    简写方法
+    let o = {
+        method:function () {
+            alert(1);
+        }
+    };//等价于
+    let o1 = {
+        method(){
+            alert(1);
+        }
+    };
+//    o1.method();//1
+
+var birth = '2000/01/01';
+
+var Person = {
+
+    name: '张三',
+
+    //等同于birth: birth
+    birth,
+
+    // 等同于hello: function ()...
+    hello() { console.log('我的名字是', this.name); }
+
+};
+
+//这种对象方法用于返回数据很方便
+function getPoint() {
+    var x = 1;
+    var y = 10;
+    return {x, y};
+}
+
+//二 属性名表达式
+let obj = {};
+// 方法一
+obj.foo = true;
+
+// 方法二
+obj['a' + 'bc'] = 123;
+//let obj = {
+//    [propKey]: true,
+//    ['a' + 'bc']: 123
+//};
+
+var lastWord = 'last word';
+
+var a = {
+    'first word': 'hello',
+    [lastWord]: 'world'
+};
+
+a['first word'] // "hello"
+a[lastWord] // "world"
+a['last word'] // "world"
+
+//扩展运算符（...）用于取出参数对象的所有可遍历属性，拷贝到当前对象之中  这等同于使用Object.assign方法。
+let z = { a: 3, b: 4 };
+let n = { ...z };//不支持 看来要引入webpack es6
+console.log(n) // { a: 3, b: 4 }
+</script>
+</html>

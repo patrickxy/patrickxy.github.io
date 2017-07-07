@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+</body>
+<script>
+    var obj = ['{"index": 1,"name": "活动","type": "activity"}',
+        '{"index": 0,"name": "海报","type": "index"}',
+        '{"index": 2,"name": "参与成功","type": "success"}'
+    ];
+    var obj1 = [];
+    obj.forEach((item) => {
+        obj1.push(JSON.parse(item));
+    })
+    console.log(obj1);
+</script>
+
+</html>
