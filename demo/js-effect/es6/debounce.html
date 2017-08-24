@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link href="css/style.css" rel="stylesheet">-->
+</head>
+
+<body>
+    <div id="test" style="height:2000px;">
+        <h3>debounce</h3>
+        <p>函数防抖就是让某个函数在上一次执行后，满足等待某个时间内不再触发此函数后再执行，而在这个等待时间内再次触发此函数，等待时间会重新计算。</p>
+        <p>autocomplete 最常见的就是用户注册时候的手机号码验证和邮箱验证了。只有等用户输入完毕后，前端才需要检查格式是否正确，如果不正确，再弹出提示语</p>
+
+        <h3>throttle节流</h3>
+        <p>不是要在每完成等待某个时间后去执行某函数，而是要每间隔某个时间去执行某函数，避免函数的过多执行，这个方式就叫函数节流。</p>
+        <p>在监听页面元素滚动事件的时候会用到</p>
+    </div>
+</body>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+    var debounce = function(idle, action) {
+        var last
+        return function() {
+            var ctx = this,
+                args = arguments
+            clearTimeout(last)
+            last = setTimeout(function() {
+                action.apply(ctx, args)
+            }, idle)
+        }
+    }
+    var throttle = function(delay, action) {
+        var last = 0
+        return function() {
+            var curr = +new Date()
+            if (curr - last > delay) {
+                action.apply(this, arguments)
+                last = curr
+            }
+        }
+    }
+
+    $(document).scroll(
+        debounce(200, function() {
+            console.log(1);
+        })
+    )
+    $(document).scroll(
+        throttle(200, function() {
+            console.log(2);
+        })
+    )
+    console.log([1, 2, 3].indexOf(2));
+</script>
+
+</html>

@@ -6,11 +6,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="css/style.css" rel="stylesheet">
+    <style>
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+        
+        body {
+            overflow: auto;
+        }
+    </style>
 </head>
 
 <body>
+    <header style="width:100%;height:60px;position:fixed;top:0;border:solid 1px red;">
+        1234
+    </header>
+    <div style="height:700px;"></div>
 
+
+
+    <p id="test" class="test1 test2" data-labelcolor="23456789color">
+        <span>12
+            34
+        </span>
+    </p>
 </body>
+<script src="http://apps.bdimg.com/libs/jquery/1.11.3/jquery.min.js"></script>
 <script>
     var obj = ['{"index": 1,"name": "活动","type": "activity"}',
         '{"index": 0,"name": "海报","type": "index"}',
@@ -18,9 +41,79 @@
     ];
     var obj1 = [];
     obj.forEach((item) => {
-        obj1.push(JSON.parse(item));
+            obj1.push(JSON.parse(item));
+        })
+        // console.log(obj1);
+
+    var objArr = [{
+        order: 1,
+        style: {
+            width: 1
+        }
+    }, {
+        order: 2,
+        style: {
+            width: 2
+        }
+    }, {
+        order: 1,
+        style: {
+            height: 3
+        }
+    }];
+    var assignAtrr = [];
+    // [{index:1,style:{height:3}},{index:2,style:{width:}}]
+    objArr.forEach((item, index) => {
+        if (!assignAtrr[item.order]) {
+            assignAtrr[item.order] = {
+                order: item.order,
+                style: {}
+            };
+        }
+        // var newStyle = $.extend({}, assignAtrr[item.order].style, item.style);
+        // assignAtrr[item.order].style = newStyle;
+        Object.assign(assignAtrr[item.order].style, item.style)
     })
-    console.log(obj1);
+    console.log(assignAtrr);
+
+
+    var a = [{
+        x: 'x'
+    }, {
+        y: 'y'
+    }, {
+        z: 'z'
+    }];
+    var b = a.slice(0, 1); //{x:'x'}
+    var c = a.slice(0, 0); //{x:'x'}
+    console.log(b);
+    console.log(c);
+    var test1 = {
+        '0': 123
+    };
+    console.log(test1['0']);
+
+    var domObj = {
+        style: {}
+    };
+    console.log(domObj.newStyle);
+
+    var xy = {
+        a: 1,
+        b: 2
+    }
+    var dy = {
+        b: 3
+    };
+    console.log(Object.assign({}, dy, xy));
+    var str = `<span>12
+            34
+        </span>`;
+    console.log($('#test').prop("outerHTML").replace(str, ''));
+    console.log($('#test').data('labelcolor'));
+    window.onbeforeunload = function() {
+        return "你确定要离开吗";
+    }
 </script>
 
 </html>

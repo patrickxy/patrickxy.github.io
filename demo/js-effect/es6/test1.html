@@ -1,0 +1,268 @@
+<template>
+  <div>
+    <h2>我的活动（23）<el-button type="primary" class="fr">创建活动</el-button></h2> 
+  <el-row :gutter="10" style="margin:0;">
+    <el-col :span="6" v-for="(item, index) in listData" :key="index">
+      <el-card :body-style="{ padding: '0px' }">
+        <img src="http://element.eleme.io/static/hamburger.50e4091.png" class="image">
+        <div class="bottom-wrap">
+          <p class="status"><span>{{item.state}}</span></p>
+          <div class="bottom clearfix">
+            <p>{{item.title}}</p>
+            <p class="time">{{ item.startDate }}至{{item.endDate}}</p>
+            <div class="action-list" v-if="item.state!='待审核'">
+              <a class="show-qrcode" id="jsShowQrcode" v-on:mouseenter="toggleQrcode(index,'open')" v-on:mouseleave="toggleQrcode(index,'close')">维码</a>
+              <el-tooltip placement="top">
+                <div slot="content">加预算</div>
+                <a class="budget">预算</a>
+              </el-tooltip>
+              <a class="delay">延时</a>
+              <a class="pause">暂停</a>
+              <el-tooltip placement="top" popper-class=''>
+                <div slot="content">下线</div>
+                <a class="offline">下线</a>
+              </el-tooltip>
+            </div>
+          </div>
+        </div>
+        
+        <div class="layer-action" v-if="item.state=='已发布'">
+            <router-link :to='"/admin/preview/"+item.id'>预览</router-link>
+            <!--<a href="">预览</a>-->
+            <a :href="'/m/portal/editor.html?id='+item.id">编辑</a>
+            <a href="">统计</a>
+        </div>
+        <div class="layer-action" v-else-if="item.state=='待审核'">
+          活动正在审核中，请耐心等待
+        </div>
+        <div class="layer-action" v-else>
+          <router-link :to='"/admin/preview/"+item.id'>预览</router-link>
+          <a :href="'/m/portal/editor.html?id='+item.id">编辑</a>
+          <a href="">发布</a>
+        </div>
+        <div class="layer-qrcode">
+            <img width='100' height='100' src="http://img.kzcn.cc/100x100/" alt="">
+        </div>
+      </el-card>
+    </el-col>
+</el-row>
+<!--页面底部加载-->
+    <div class="loading-tip"
+      v-loading="isGetList"
+      element-loading-text="拼命加载中"
+    ></div>
+
+  </div>
+
+</template>
+
+<script>
+    export default {
+        methods: {
+            toggleQrcode(index, msg) {
+                msg == 'open' ?
+                    document.getElementsByClassName('el-card')[index].classList.add('active') :
+                    document.getElementsByClassName('el-card')[index].classList.remove('active');
+            }
+        },
+        data() {
+            return {
+                currentDate: new Date().toLocaleString(),
+                listData: [{
+                    id: 1,
+                    title: '注册送活动',
+                    state: '已发布',
+                    startDate: '2017.10.10',
+                    endDate: '2017.10.10',
+                    qrcodeUrl: 'http://img.kzcn.cc/100x100/'
+                }, {
+                    id: 2,
+                    title: '注册送活动',
+                    state: '未发布',
+                    startDate: '2017.10.10',
+                    endDate: '2017.10.10',
+                    qrcodeUrl: 'http://img.kzcn.cc/100x100/'
+                }, {
+                    id: 3,
+                    title: '注册送活动',
+                    state: '待审核',
+                    startDate: '2017.10.10',
+                    endDate: '2017.10.10',
+                    qrcodeUrl: 'http://img.kzcn.cc/100x100/'
+                }, {
+                    id: 4,
+                    title: '注册送活动',
+                    state: '已暂停',
+                    startDate: '2017.10.10',
+                    endDate: '2017.10.10',
+                    qrcodeUrl: 'http://img.kzcn.cc/100x100/'
+                }, {
+                    id: 5,
+                    title: '注册送活动',
+                    state: '已过期',
+                    startDate: '2017.10.10',
+                    endDate: '2017.10.10',
+                    qrcodeUrl: 'http://img.kzcn.cc/100x100/'
+                }],
+                tableData: [{
+                    date: '2017-08-16',
+                    name: '注册送100MB流量',
+                    state: '已发布',
+                    id: 1
+                }, {
+                    date: '2017-08-15',
+                    name: '拆红包好开心',
+                    state: '待发布',
+                    id: 2
+                }, ],
+            };
+        },
+    };
+</script>
+
+<style lang='less' scope>
+    .breadcrumb-header {
+        position: relative;
+        height: 50px;
+        padding: 15px 0;
+        .tool {
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+    }
+    
+    h2 {
+        height: 50px;
+        border-bottom: solid 1px #e6e7e9;
+        line-height: 50px;
+        padding: 0 20px;
+        margin-bottom: 20px;
+    }
+    
+    .el-row {
+        padding: 0 15px;
+        .el-card {
+            position: relative;
+            margin-bottom: 20px;
+            height: 276px;
+            &.active .layer-qrcode {
+                display: flex;
+            }
+            .bottom-wrap {
+                position: absolute;
+                width: 100%;
+                bottom: 0;
+                z-index: 2;
+                .status {
+                    height: 32px;
+                    text-align: right;
+                    span {
+                        display: inline-block;
+                        font-size: 14px;
+                        padding: 7px 10px;
+                        background-color: #333;
+                        color: #fff;
+                        border-top-left-radius: 5px;
+                    }
+                }
+                .bottom {
+                    padding: 14px;
+                    line-height: 12px;
+                    background-color: #fff;
+                    .time {
+                        font-size: 12px;
+                        color: #999;
+                        margin-top: 15px;
+                        margin-bottom: 21px;
+                    }
+                    .action-list {
+                        transition: all linear .5s;
+                        height: 0px;
+                        overflow: hidden;
+                        text-align: right;
+                        a {
+                            font-size: 12px;
+                            display: inline-block;
+                            width: 28px;
+                            height: 28px;
+                            border: solid 1px #333;
+                            &:first-child {
+                                float: left;
+                            }
+                        }
+                    }
+                }
+            }
+            .layer-action {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 0px;
+                overflow: hidden;
+                z-index: 1;
+                background-color: rgba(0, 0, 0, .5);
+                transition: height linear .5s;
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                color: #fff;
+                a {
+                    display: inline-block;
+                    text-align: center;
+                    line-height: 40px;
+                    border-radius: 40px;
+                    font-size: 14px;
+                    width: 40px;
+                    height: 40px;
+                    color: #fff;
+                    background-color: rgba(255, 255, 255, .3);
+                    &:hover {
+                        background-color: #459ae9;
+                    }
+                }
+            }
+            .layer-qrcode {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 156px;
+                z-index: 3;
+                background-color: #fff;
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                display: none;
+            }
+            .el-card__body {
+                &>img {
+                    width: 100%;
+                    height: 186px;
+                }
+                &:hover .action-list {
+                    height: 30px;
+                }
+                &:hover .layer-action {
+                    height: 186px;
+                }
+            }
+        }
+    }
+    
+    .image {
+        width: 100%;
+        display: block;
+    }
+    
+    .clearfix:before,
+    .clearfix:after {
+        display: table;
+        content: "";
+    }
+    
+    .clearfix:after {
+        clear: both
+    }
+</style>

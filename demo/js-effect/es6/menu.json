@@ -1,0 +1,54 @@
+{
+    "menu": [{
+            "name": "活动",
+            "submenu": [
+                { "name": "我的活动", "link": "/admin/activity" },
+                { "name": "流量赠送", "link": "/admin/activity/gift" }
+            ]
+        },
+        {
+            "name": "统计",
+            "submenu": [
+                { "name": "账单明细", "link": "/admin/stat/bill" },
+                { "name": "领取记录", "link": "/admin/stat/receive" },
+                { "name": "参与记录", "link": "/admin/stat/participate" },
+                { "name": "活动效果", "link": "/admin/stat/effect" },
+                { "name": "投票结果", "link": "/admin/stat/vote" }
+            ]
+        },
+        {
+            "name": "推广",
+            "submenu": [
+                { "name": "蜂享自平台", "link": "/admin/promotion/platform" },
+                { "name": "微信公众号", "link": "/admin/promotion/wechat" }
+            ]
+        },
+        {
+            "name": "开发",
+            "submenu": [
+                { "name": "自定义活动", "link": "/admin/development/customize" },
+                { "name": "第三方接口", "link": "/admin/development/interface" },
+                { "name": "接口权限", "link": "/admin/development/permissions" },
+                { "name": "API文档", "link": "/admin/development/apidoc" }
+            ]
+        }, {
+            "name": "账户",
+            "submenu": [
+                { "name": "账户信息", "link": "/admin/account/info" },
+                { "name": "账户余额", "link": "/admin/account/balance" },
+                { "name": "员工管理", "link": "/admin/account/staff" }
+            ]
+        },
+        {
+            "name": "消息管理",
+            "submenu": [
+                { "name": "消息列表", "link": "/admin/message" }
+            ]
+        }, {
+            "name": "更多",
+            "submenu": [
+                { "name": "下载管理", "link": "/admin/other/download" }
+            ]
+        }
+    ]
+}

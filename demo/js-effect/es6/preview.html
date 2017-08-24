@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html,
+        body {
+            font-family: 微软雅黑, 黑体, sans-serif;
+        }
+        
+        #preview-container {
+            display: table;
+            padding: 20px;
+        }
+        
+        #preview-container #preview-left {
+            display: table-cell;
+            position: relative;
+            width: 330px;
+            height: 570px;
+            border-radius: 4px;
+            background-color: #e9eaea;
+        }
+        
+        #preview-container #preview-left p {
+            color: #333333;
+            font-size: 14px;
+            text-align: right;
+        }
+        
+        #preview-container #preview-left p span {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 3px;
+            border: solid 1px #459ae9;
+            color: #459ae9;
+            background-color: #fff;
+        }
+        
+        #preview-container #preview-left p span:hover {
+            cursor: pointer;
+        }
+        
+        #preview-container #preview-left iframe {
+            position: absolute;
+            width: 375px;
+            height: 604px;
+            left: 5px;
+            top: 50px;
+            -webkit-transform: scale(0.853333);
+            transform: scale(0.853333);
+            -webkit-transform-origin: 0 0;
+            transform-origin: 0 0;
+            outline: 0;
+        }
+        
+        #preview-container #preview-right {
+            display: table-cell;
+            padding-left: 100px;
+        }
+        
+        #preview-container #preview-right p {
+            font-size: 14px;
+            margin-bottom: 20px;
+            color: #646464;
+        }
+        
+        #preview-container #preview-right p span {
+            color: #222222;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="preview-container">
+        <div id="preview-left">
+            <p><span id="checkImgAndWords">查看</span></p>
+            <iframe src="http://192.168.4.70:2000/s/2ayUv2/index.html"></iframe>
+        </div>
+        <div id="preview-right">
+            <p>活动主题：<span id="actiTitle"></span></p>
+            <p>活动时间：<span id="actiTime"></span></p>
+            <p>活动类型：<span id="actiType"></span></p>
+            <p>页面类型：<span id="pageType"></span></p>
+            <p>活动预算：<span id="actiBudget"></span></p>
+            <p>流量类型：<span id="trafficType"></span></p>
+        </div>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        // 获取url参数
+        function getUrlParam(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]);
+            return null;
+        }
+
+        $(function($) {
+            $.ajax({
+                url: "/m/actimanager/cPreView.do",
+                data: {
+                    id: 1
+                },
+                success: function(res) {},
+                error: function(err) {
+
+                },
+                complete: function() {
+                    var res = {
+                        "data": {
+                            "pageType": 1,
+                            "actiType": ["调查问卷"],
+                            "budget": 1000.00,
+                            "startDate": "2017-08-18 00:00:00",
+                            "imgUrls": ["2ayUv2/images/acti_face.png", "2ayUv2/images/acti_grass.png", "2ayUv2/images/acti_submit.png", "2ayUv2/images/acti_title.png", "2ayUv2/images/poster_book.png", "2ayUv2/images/poster_phone.png", "2ayUv2/images/poster_submit.png", "2ayUv2/images/poster_title.png", "2ayUv2/images/poster_txt.png", "2ayUv2/images/poster_wave.png", "2ayUv2/images/poster_zy.png", "2ayUv2/images/success_box.png", "2ayUv2/images/success_fish.png", "2ayUv2/images/success_glass.png", "2ayUv2/images/success_ok.png", "2ayUv2/images/success_pop.png", "2ayUv2/images/success_pop2.png", "2ayUv2/images/success_pop3.png"],
+                            "trafficScope": "0",
+                            "actiTitle": "问卷短信验证模板",
+                            "endDate": "2017-08-28 00:00:00",
+                            "shortUrl": "2ayUv2"
+                        },
+                        "code": 0
+                    };
+                    if (res.code == 0) {
+                        $('#actiTitle').html(res.data.actiTitle);
+                        $('#actiTime').html(res.data.startDate);
+                        $('#actiType').html(res.data.actiType);
+                        $('#pageType').html(res.data.pageType);
+                        $('#actiBudget').html(res.data.budget);
+                        $('#trafficType').html(res.data.trafficScope);
+                        $('#checkImgAndWords').click(function() {
+                            $.get("http://192.168.4.70:2000/s/2ayUv2/index.html", function(result) {
+                                console.log(result);
+                                console.log(1);
+                                console.log($(result).find('p').text());
+                            });
+                        })
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
